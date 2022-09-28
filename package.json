@@ -1,0 +1,27 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "Web developer course diploma project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "lint": "npx eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noi5enu1sanc3/movies-explorer-api.git"
+  },
+  "author": "noi5enu1sanc3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noi5enu1sanc3/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/noi5enu1sanc3/movies-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^8.24.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.20"
+  }
+}
