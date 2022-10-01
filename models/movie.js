@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const linkRegex = require('../helpers/constants');
+const { linkRegex } = require('../helpers/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -27,6 +27,11 @@ const movieSchema = new mongoose.Schema({
     required: true,
     match: linkRegex,
   },
+  trailerLink: {
+    type: String,
+    required: true,
+    match: linkRegex,
+  },
   thumbnail: {
     type: String,
     required: true,
@@ -35,6 +40,10 @@ const movieSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
+    required: true,
+  },
+  movieId: {
+    type: Number,
     required: true,
   },
   nameRU: {
@@ -46,13 +55,5 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
 }, { versionKey: false });
-
-// PRE MIDDLEWARE
-movieSchema.pre('save', function saveId(next) {
-  this.movieId = this._id;
-  this.movieId.required = true;
-
-  next();
-});
 
 module.exports = mongoose.model('movie', movieSchema);

@@ -25,7 +25,7 @@ const createUser = async (req, res, next) => {
     const user = await User.create({
       name, email, password: hash,
     });
-    res.send({ data: user.toJSON() });
+    res.send({ user: user.toJSON() });
   } catch (err) {
     if (err instanceof mongoose.Error.ValidationError) {
       next(new ValidationError(`${validationErrorMessage}: ${err.message}`));

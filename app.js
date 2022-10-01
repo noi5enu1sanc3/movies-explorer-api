@@ -2,11 +2,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const helmet = require('helmet');
+
+const router = require('./routes/index');
+const { errorHandler } = require('./middlewares/errorHandler');
+
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
+app.use(helmet());
+
 app.use(bodyParser.json());
+
+app.use(router);
 
 const main = async (next) => {
   try {
@@ -24,3 +33,5 @@ const main = async (next) => {
 };
 
 main();
+
+app.use(errorHandler);

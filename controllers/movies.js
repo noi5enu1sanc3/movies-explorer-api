@@ -22,7 +22,7 @@ const addMovie = async (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameRU,
     nameEN,
     thumbnail,
@@ -37,7 +37,7 @@ const addMovie = async (req, res, next) => {
         year,
         description,
         image,
-        trailer,
+        trailerLink,
         nameRU,
         nameEN,
         thumbnail,
@@ -57,7 +57,7 @@ const addMovie = async (req, res, next) => {
 
 const deleteMovie = async (req, res, next) => {
   try {
-    const requestedMovie = await Movie.findById(req.params.movieId)
+    const requestedMovie = await Movie.findById(req.params._id)
       .orFail(() => next(new NotFoundError(movieNotFoundMessage)));
     if (req.user._id !== requestedMovie.owner._id.toString()) {
       next(new ForbiddenError(forbiddenErrorMessage));
