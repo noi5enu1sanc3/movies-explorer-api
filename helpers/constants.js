@@ -18,6 +18,8 @@ const forbiddenErrorMessage = 'Only allowed to delete your own movies';
 const validationErrorMessage = 'Validation error';
 const userWithThisEmailAlreadyExistMessage = 'User with this email already exists';
 
+const MONGO_URL = 'mongodb://localhost:27017/bitfilmsdb';
+
 module.exports = {
   ERROR_CODE_VALIDATION_ERROR,
   ERROR_CODE_UNAUTHORIZED,
@@ -35,4 +37,5 @@ module.exports = {
   validationErrorMessage,
   userWithThisEmailAlreadyExistMessage,
   linkRegex,
+  MONGO_URL,
 };

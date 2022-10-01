@@ -1,5 +1,3 @@
-import limiter from './middlewares/rateLimiter';
-
 require('dotenv').config();
 
 const express = require('express');
@@ -9,8 +7,10 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 
 const { errors } = require('celebrate');
+const limiter = require('./middlewares/rateLimiter');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { MONGO_URL } = require('./helpers/constants');
 
 const router = require('./routes/index');
 const { errorHandler } = require('./middlewares/errorHandler');
@@ -31,7 +31,7 @@ app.use(router);
 
 const main = async (next) => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+    await mongoose.connect(MONGO_URL);
   } catch (err) {
     next(err);
   }
