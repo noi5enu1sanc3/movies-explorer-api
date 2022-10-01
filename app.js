@@ -1,4 +1,7 @@
+import limiter from './middlewares/rateLimiter';
+
 require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -15,6 +18,8 @@ const { errorHandler } = require('./middlewares/errorHandler');
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+app.use(limiter);
 
 app.use(helmet());
 
