@@ -4,6 +4,10 @@ const bodyParser = require('body-parser');
 
 const helmet = require('helmet');
 
+const { errors } = require('celebrate');
+
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const router = require('./routes/index');
 const { errorHandler } = require('./middlewares/errorHandler');
 
@@ -14,6 +18,8 @@ const app = express();
 app.use(helmet());
 
 app.use(bodyParser.json());
+
+app.use(requestLogger);
 
 app.use(router);
 
@@ -33,5 +39,9 @@ const main = async (next) => {
 };
 
 main();
+
+app.use(errorLogger);
+
+app.use(errors());
 
 app.use(errorHandler);
