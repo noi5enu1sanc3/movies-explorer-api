@@ -14,6 +14,8 @@ const {
   userWithThisEmailAlreadyExistMessage,
 } = require('../helpers/constants');
 
+const { JWT_DEV } = require('../helpers/config');
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 const createUser = async (req, res, next) => {
@@ -41,7 +43,7 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findUserByCredentials(email, password);
-    const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' });
+    const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : JWT_DEV, { expiresIn: '7d' });
     res.send({ token });
   } catch (err) {
     next(new UnauthorizedError(wrongEmailOrPasswordMessage));
