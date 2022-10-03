@@ -11,7 +11,7 @@ const limiter = require('./middlewares/rateLimiter');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const router = require('./routes/index');
+const router = require('./routes');
 const { errorHandler } = require('./middlewares/errorHandler');
 
 const { MONGO_URL } = require('./helpers/config');
@@ -33,11 +33,7 @@ app.use(router);
 const main = async (next) => {
   try {
     await mongoose.connect(MONGO_URL);
-  } catch (err) {
-    next(err);
-  }
-  try {
-    await app.listen(PORT);
+    app.listen(PORT);
   } catch (err) {
     next(err);
   }
