@@ -14,9 +14,9 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
 const { errorHandler } = require('./middlewares/errorHandler');
 
-const { MONGO_URL } = require('./helpers/config');
+const { MONGO_URL_DEV } = require('./helpers/config');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, MONGO_URL } = process.env;
 
 const app = express();
 
@@ -32,7 +32,7 @@ app.use(router);
 
 const main = async (next) => {
   try {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : MONGO_URL_DEV);
     app.listen(PORT);
   } catch (err) {
     next(err);

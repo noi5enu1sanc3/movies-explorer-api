@@ -1,7 +1,7 @@
-const MONGO_URL = 'mongodb://localhost:27017/moviesdb';
+const MONGO_URL_DEV = 'mongodb://localhost:27017/devmoviesdb';
 const JWT_DEV = 'dev-secret';
 
 module.exports = {
-  MONGO_URL,
+  MONGO_URL_DEV,
   JWT_DEV,
 };
