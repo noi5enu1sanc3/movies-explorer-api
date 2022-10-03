@@ -15,19 +15,6 @@ const getMovies = async (req, res, next) => {
 };
 
 const addMovie = async (req, res, next) => {
-  const {
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    nameRU,
-    nameEN,
-    thumbnail,
-    movieId,
-  } = req.body;
   try {
     const movie = await (
       await Movie.create({
