@@ -31,17 +31,7 @@ const addMovie = async (req, res, next) => {
   try {
     const movie = await (
       await Movie.create({
-        country,
-        director,
-        duration,
-        year,
-        description,
-        image,
-        trailerLink,
-        nameRU,
-        nameEN,
-        thumbnail,
-        movieId,
+        ...req.body,
         owner: req.user._id,
       })
     ).populate('owner');
