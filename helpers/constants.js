@@ -16,6 +16,7 @@ const authorizationErrorMessage = 'Authorization required';
 const forbiddenErrorMessage = 'Only allowed to delete your own movies';
 const validationErrorMessage = 'Validation error';
 const userWithThisEmailAlreadyExistMessage = 'User with this email already exists';
+const nonValidEmailMessage = 'Non-valid email';
 
 module.exports = {
   ERROR_CODE_VALIDATION_ERROR,
@@ -33,5 +34,6 @@ module.exports = {
   forbiddenErrorMessage,
   validationErrorMessage,
   userWithThisEmailAlreadyExistMessage,
+  nonValidEmailMessage,
   linkRegex,
 };
