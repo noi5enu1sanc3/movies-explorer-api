@@ -57,12 +57,12 @@ const addMovie = async (req, res, next) => {
 
 const deleteMovie = async (req, res, next) => {
   try {
-    const requestedMovie = await Movie.findById(req.params._id)
+    const requestedMovie = await Movie.findById(req.params.movieId)
       .orFail(() => next(new NotFoundError(movieNotFoundMessage)));
     if (req.user._id !== requestedMovie.owner._id.toString()) {
       next(new ForbiddenError(forbiddenErrorMessage));
     } else {
-      const movie = await Movie.findByIdAndRemove(req.params._id);
+      const movie = await Movie.findByIdAndRemove(req.params.movieId);
       res.send({ movie });
     }
   } catch (err) {
