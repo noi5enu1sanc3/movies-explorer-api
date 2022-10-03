@@ -42,11 +42,12 @@ const createUser = async (req, res, next) => {
 const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findUserByCredentials(email, password);
+    const user = await User.findUserByCredentials(email, password)
+      .orFail(() => next(new UnauthorizedError(wrongEmailOrPasswordMessage)));
     const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : JWT_DEV, { expiresIn: '7d' });
     res.send({ token });
   } catch (err) {
-    next(new UnauthorizedError(wrongEmailOrPasswordMessage));
+    next(err);
   }
 };
 
@@ -73,6 +74,8 @@ const updateUserProfile = async (req, res, next) => {
     if (err instanceof mongoose.Error.ValidationError
       || err instanceof mongoose.Error.CastError) {
       next(new ValidationError(`${validationErrorMessage}: ${err.message}`));
+    } else if (err.code === 11000) {
+      next(new ConflictError(userWithThisEmailAlreadyExistMessage));
     } else {
       next(err);
     }
