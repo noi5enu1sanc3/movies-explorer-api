@@ -11,21 +11,15 @@ const validateLogin = celebrate({
 
 const validateCreateUser = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 });
 
-const validateUserId = celebrate({
-  params: Joi.object().keys({
-    userId: Joi.objectId(),
-  }),
-});
-
 const validateUpdateUserProfile = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
     email: Joi.string().required().email(),
   }),
 });
@@ -37,25 +31,24 @@ const validateAddMovie = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().pattern(linkRegex),
-    trailerLink: Joi.string().pattern(linkRegex),
+    image: Joi.string().pattern(linkRegex).required(),
+    trailerLink: Joi.string().pattern(linkRegex).required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-    thumbnail: Joi.string().pattern(linkRegex),
+    thumbnail: Joi.string().pattern(linkRegex).required(),
     movieId: Joi.number().required(),
   }),
 });
 
 const validateGetMovieById = celebrate({
   params: Joi.object().keys({
-    _id: Joi.objectId(),
+    _id: Joi.objectId().required(),
   }),
 });
 
 module.exports = {
   validateLogin,
   validateCreateUser,
-  validateUserId,
   validateUpdateUserProfile,
   validateAddMovie,
   validateGetMovieById,
