@@ -20,13 +20,13 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(limiter);
-
 app.use(helmet());
 
 app.use(bodyParser.json());
 
 app.use(requestLogger);
+
+app.use(limiter);
 
 app.use(router);
 
