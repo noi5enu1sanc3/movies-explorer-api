@@ -5,11 +5,9 @@ const User = require('../models/user');
 
 const NotFoundError = require('../helpers/errors/NotFoundError');
 const ValidationError = require('../helpers/errors/ValidationError');
-const UnauthorizedError = require('../helpers/errors/UnauthorizedError');
 const ConflictError = require('../helpers/errors/ConflictError');
 const {
   userNotFoundMessage,
-  wrongEmailOrPasswordMessage,
   validationErrorMessage,
   userWithThisEmailAlreadyExistMessage,
 } = require('../helpers/constants');
