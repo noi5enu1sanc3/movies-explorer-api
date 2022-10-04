@@ -42,8 +42,7 @@ const createUser = async (req, res, next) => {
 const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findUserByCredentials(email, password)
-      .orFail(() => next(new UnauthorizedError(wrongEmailOrPasswordMessage)));
+    const user = await User.findUserByCredentials(email, password, next);
     const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : JWT_DEV, { expiresIn: '7d' });
     res.send({ token });
   } catch (err) {
