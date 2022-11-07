@@ -5,7 +5,7 @@ Stack:
 - MongoDB
 - Mongoose
 - Nginx
-- logging with Winston
+- error and request logging with Winston
 - validation with Joi
 
 ## Run Locally
