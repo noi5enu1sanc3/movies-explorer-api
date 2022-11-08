@@ -30,6 +30,7 @@ app.use(
       'http://localhost:3002',
       'https://localhost:3002',
       'https://noi5e.nomoredomains.icu',
+      'http://noi5e.nomoredomains.icu',
     ],
     credentials: true,
   }),
