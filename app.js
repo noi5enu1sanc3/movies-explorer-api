@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 
 const helmet = require('helmet');
 
+const cors = require('cors');
+
 const { errors } = require('celebrate');
 const limiter = require('./middlewares/rateLimiter');
 
@@ -22,6 +24,17 @@ const app = express();
 
 app.use(helmet());
 
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3002',
+      'https://localhost:3002',
+      'https://noi5e.nomoredomains.icu',
+    ],
+    credentials: true,
+  }),
+);
+
 app.use(bodyParser.json());
 
 app.use(requestLogger);
@@ -32,7 +45,9 @@ app.use(router);
 
 const main = async (next) => {
   try {
-    await mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : MONGO_URL_DEV);
+    await mongoose.connect(
+      NODE_ENV === 'production' ? MONGO_URL : MONGO_URL_DEV,
+    );
     app.listen(PORT);
   } catch (err) {
     next(err);
