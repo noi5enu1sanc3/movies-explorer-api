@@ -38,6 +38,3 @@ Start the server in dev mode with hot reload
 ```bash
   npm run dev
 ```
-
-[api.noi5e.nomoredomains.icu](https://api.noi5e.nomoredomains.icu)
-`51.250.97.80`
